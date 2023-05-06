@@ -1,8 +1,8 @@
 '''
 Sample Command:-
 python generate_aruco_tags.py --id 24 --type DICT_5X5_100 -o tags/
+Install older cv2 
 '''
-
 
 import numpy as np
 import argparse
@@ -10,14 +10,12 @@ from utils import ARUCO_DICT
 import cv2
 import sys
 
-
 ap = argparse.ArgumentParser()
 ap.add_argument("-o", "--output", required=True, help="path to output folder to save ArUCo tag")
 ap.add_argument("-i", "--id", type=int, required=True, help="ID of ArUCo tag to generate")
 ap.add_argument("-t", "--type", type=str, default="DICT_ARUCO_ORIGINAL", help="type of ArUCo tag to generate")
 ap.add_argument("-s", "--size", type=int, default=200, help="Size of the ArUCo tag")
 args = vars(ap.parse_args())
-
 
 # Check to see if the dictionary is supported
 if ARUCO_DICT.get(args["type"], None) is None:
