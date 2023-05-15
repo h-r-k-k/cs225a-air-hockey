@@ -24,7 +24,7 @@ void sighandler(int){runloop = false;}
 #include "../redis_keys.h"
 
 // Location of URDF files specifying world and robot information
-const string robot_file = "./resources/panda_arm.urdf";
+const string robot_file = "./resources/model/panda/panda_arm.urdf";
 
 enum State 
 {
