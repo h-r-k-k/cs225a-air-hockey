@@ -61,18 +61,34 @@
         	<inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
       	</inertial>
 
-	    <!-- <visual>
+	    <visual>
 	        <origin xyz="0 0 0" rpy="0 0 0" />
 			<geometry>
 				<mesh filename="./resources/model/test_objects/meshes/visual/AirHockeyTable.obj" scale="1.0 1.0 1.0" />
 	        </geometry>
+	    </visual>
+
+		<!-- Below is the visualization for the collision box -->
+		<visual>
+	        <origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="./resources/model/test_objects/meshes/collision/collision_box_base_only.obj" scale="1.0 1.0 1.0" />
+	        </geometry>
+	    </visual>
+
+		<!-- <visual>
+	        <origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="./resources/model/test_objects/meshes/collision/collision_box_edge_only.obj" scale="1.0 1.0 1.0" />
+	        </geometry>
 	    </visual> -->
 
-		<!-- Below is the added visual box -->
+		
+		<!-- obsolete code for manually add collision box that does not work
 		<visual>
 	        <origin xyz="0 0 0.2625" rpy="0 0 0" />
 	        <geometry>
-	            <box size="1.53 0.60 0.525" />
+	            <box size="1.53 0.79 0.525" />
 	        </geometry>
 	        <material name="material">
 		        <color rgba="0.235 0.702 0.443 0.5" />
@@ -98,7 +114,7 @@
 		        <color rgba="0.235 0.702 0.443 0.5" />
 	        </material>
 	    </visual>
-<!-- 
+
 		<visual>
 	        <origin xyz="0.72 0.2125 0.545" rpy="0 0 0" />
 	        <geometry>
@@ -148,53 +164,64 @@
 
 		<!-- Newly added collision box -->
 		<collision>
-	        <origin xyz="0 0 0.2625" rpy="0 0 0" />
-	        <geometry>
-	            <box size="1.53 0.6 0.525" />
-	        </geometry>
-	    </collision>
-
-		<collision>
-	        <origin xyz="0 0.35 0.545" rpy="0 0 0" />
-	        <geometry>
-	            <box size="1.53 0.09 0.05" />
+	        <origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="./resources/model/test_objects/meshes/collision/collision_box_base_only.obj" scale="1.0 1.0 1.0" />
 	        </geometry>
 	    </collision>
 
 		<!-- <collision>
-	        <origin xyz="0 -0.35 0.545" rpy="0 0 0" />
-	        <geometry>
-	            <box size="1.53 0.09 0.05" />
+	        <origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="./resources/model/test_objects/meshes/collision/collision_box_edge_only.obj" scale="1.0 1.0 1.0" />
 	        </geometry>
-	    </collision> -->
+		</collision> -->
 
-		<!-- <collision>
-	        <origin xyz="0.72 0.2125 0.545" rpy="0 0 0" />
-	        <geometry>
-	            <box size="0.09 0.185 0.05" />
-	        </geometry>
-	    </collision>
+		
+	</static_object>
 
-		<collision>
-	        <origin xyz="0.72 -0.2125 0.545" rpy="0 0 0" />
-	        <geometry>
-	            <box size="0.09 0.185 0.05" />
-	        </geometry>
-	    </collision>
+	<static_object name="TableLeftEdge">
+		<origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
 
-		<collision>
-	        <origin xyz="-0.72 0.2125 0.545" rpy="0 0 0" />
-	        <geometry>
-	            <box size="0.09 0.185 0.05" />
+		<!-- Below is the visualization for the collision box -->
+
+		<visual>
+	        <origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="./resources/model/test_objects/meshes/collision/collision_box_left_edge_only.obj" scale="1.0 1.0 1.0" />
 	        </geometry>
-	    </collision>
+	    </visual>
+
+		<!-- Newly added collision box -->
 
 		<collision>
-	        <origin xyz="-0.72 -0.2125 0.545" rpy="0 0 0" />
-	        <geometry>
-	            <box size="0.09 0.185 0.05" />
+	        <origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="./resources/model/test_objects/meshes/collision/collision_box_left_edge_only.obj" scale="1.0 1.0 1.0" />
 	        </geometry>
-	    </collision> -->
+		</collision>
+	</static_object>
+
+	<static_object name="TableRightEdge">
+		<origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+
+		<!-- Below is the visualization for the collision box -->
+
+		<visual>
+	        <origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="./resources/model/test_objects/meshes/collision/collision_box_right_edge_only.obj" scale="1.0 1.0 1.0" />
+	        </geometry>
+	    </visual>
+
+		<!-- Newly added collision box -->
+
+		<collision>
+	        <origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="./resources/model/test_objects/meshes/collision/collision_box_right_edge_only.obj" scale="1.0 1.0 1.0" />
+	        </geometry>
+		</collision>
 	</static_object>
 
 	<dynamic_object name="puck">
@@ -215,15 +242,16 @@
 	        </material>
 	    </visual>
 
-		<!-- <visual>
-	        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+		<visual>
+			<origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
 	        <geometry>
 	            <cylinder length="0.01" radius="0.05"/>
 	        </geometry>
-	        <material name="material">
-		        <color rgba="1 1 1 1.0" />
+			<material name="material">
+		        <color rgba="0.235 0.702 0.443 0.5" />
 	        </material>
-	    </visual> -->
+		</visual>
+
 
 	    <collision>
 	        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />

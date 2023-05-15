@@ -6,15 +6,15 @@
 
 #IncludeRegexTransform: 
 
-/home/yimengq/sai2/apps/cs225a/FinalProject/Airhockey/controller/controller.cpp
+/home/yimengq/sai2/apps/cs225a/cs225a-air-hockey/Airhockey/controller/controller.cpp
 Sai2Model.h
 -
 Sai2Primitives.h
-/home/yimengq/sai2/apps/cs225a/FinalProject/Airhockey/controller/Sai2Primitives.h
+/home/yimengq/sai2/apps/cs225a/cs225a-air-hockey/Airhockey/controller/Sai2Primitives.h
 redis/RedisClient.h
-/home/yimengq/sai2/apps/cs225a/FinalProject/Airhockey/controller/redis/RedisClient.h
+/home/yimengq/sai2/apps/cs225a/cs225a-air-hockey/Airhockey/controller/redis/RedisClient.h
 timer/LoopTimer.h
-/home/yimengq/sai2/apps/cs225a/FinalProject/Airhockey/controller/timer/LoopTimer.h
+/home/yimengq/sai2/apps/cs225a/cs225a-air-hockey/Airhockey/controller/timer/LoopTimer.h
 iostream
 -
 string
@@ -22,9 +22,9 @@ string
 signal.h
 -
 ../redis_keys.h
-/home/yimengq/sai2/apps/cs225a/FinalProject/Airhockey/redis_keys.h
+/home/yimengq/sai2/apps/cs225a/cs225a-air-hockey/Airhockey/redis_keys.h
 
-/home/yimengq/sai2/apps/cs225a/FinalProject/Airhockey/redis_keys.h
+/home/yimengq/sai2/apps/cs225a/cs225a-air-hockey/Airhockey/redis_keys.h
 
 /home/yimengq/sai2/core/chai3d/external/glew/include/GL/glew.h
 stddef.h
@@ -1561,8 +1561,6 @@ rbdl/Model.h
 /home/yimengq/sai2/core/sai2-primitives/src/Sai2Primitives.h
 tasks/JointTask.h
 /home/yimengq/sai2/core/sai2-primitives/src/tasks/JointTask.h
-tasks/PartialJointTask.h
-/home/yimengq/sai2/core/sai2-primitives/src/tasks/PartialJointTask.h
 tasks/PositionTask.h
 /home/yimengq/sai2/core/sai2-primitives/src/tasks/PositionTask.h
 tasks/OrientationTask.h
@@ -1571,8 +1569,6 @@ tasks/PosOriTask.h
 /home/yimengq/sai2/core/sai2-primitives/src/tasks/PosOriTask.h
 tasks/TwoHandTwoRobotsTask.h
 /home/yimengq/sai2/core/sai2-primitives/src/tasks/TwoHandTwoRobotsTask.h
-tasks/TwoHandTwoRobotsTaskNonRigid.h
-/home/yimengq/sai2/core/sai2-primitives/src/tasks/TwoHandTwoRobotsTaskNonRigid.h
 primitives/RedundantArmMotion.h
 /home/yimengq/sai2/core/sai2-primitives/src/primitives/RedundantArmMotion.h
 primitives/SurfaceSurfaceAlignment.h
@@ -1583,18 +1579,6 @@ haptic_tasks/HapticController.h
 /home/yimengq/sai2/core/sai2-primitives/src/haptic_tasks/HapticController.h
 haptic_tasks/BilateralPassivityController.h
 /home/yimengq/sai2/core/sai2-primitives/src/haptic_tasks/BilateralPassivityController.h
-haptic_tasks/ImpedanceControl.h
-/home/yimengq/sai2/core/sai2-primitives/src/haptic_tasks/ImpedanceControl.h
-haptic_tasks/PositionControl.h
-/home/yimengq/sai2/core/sai2-primitives/src/haptic_tasks/PositionControl.h
-perception/ForceSpaceParticleFilter.h
-/home/yimengq/sai2/core/sai2-primitives/src/perception/ForceSpaceParticleFilter.h
-perception/MomentumObserver.h
-/home/yimengq/sai2/core/sai2-primitives/src/perception/MomentumObserver.h
-humanoid/FloatingBaseContactModel.h
-/home/yimengq/sai2/core/sai2-primitives/src/humanoid/FloatingBaseContactModel.h
-humanoid/InternalForceSelectionBarrierMethod.h
-/home/yimengq/sai2/core/sai2-primitives/src/humanoid/InternalForceSelectionBarrierMethod.h
 trajectory_generation/OTG.h
 /home/yimengq/sai2/core/sai2-primitives/src/trajectory_generation/OTG.h
 trajectory_generation/OTG_ori.h
@@ -1628,14 +1612,6 @@ string
 chrono
 -
 
-/home/yimengq/sai2/core/sai2-primitives/src/haptic_tasks/ImpedanceControl.h
-Sai2Model.h
-/home/yimengq/sai2/core/sai2-primitives/src/haptic_tasks/Sai2Model.h
-filters/ButterworthFilter.h
-/home/yimengq/sai2/core/sai2-primitives/src/haptic_tasks/filters/ButterworthFilter.h
-Eigen/Dense
--
-
 /home/yimengq/sai2/core/sai2-primitives/src/haptic_tasks/OpenLoopTeleop.h
 Sai2Model.h
 /home/yimengq/sai2/core/sai2-primitives/src/haptic_tasks/Sai2Model.h
@@ -1648,42 +1624,6 @@ Eigen/Dense
 string
 -
 chrono
--
-
-/home/yimengq/sai2/core/sai2-primitives/src/haptic_tasks/PositionControl.h
-Sai2Model.h
-/home/yimengq/sai2/core/sai2-primitives/src/haptic_tasks/Sai2Model.h
-Eigen/Dense
--
-
-/home/yimengq/sai2/core/sai2-primitives/src/humanoid/FloatingBaseContactModel.h
-Sai2Model.h
-/home/yimengq/sai2/core/sai2-primitives/src/humanoid/Sai2Model.h
-vector
--
-
-/home/yimengq/sai2/core/sai2-primitives/src/humanoid/InternalForceSelectionBarrierMethod.h
-Eigen/Dense
--
-vector
--
-
-/home/yimengq/sai2/core/sai2-primitives/src/perception/ForceSpaceParticleFilter.h
-Eigen/Dense
--
-string
--
-vector
--
-random
--
-
-/home/yimengq/sai2/core/sai2-primitives/src/perception/MomentumObserver.h
-Sai2Model.h
-/home/yimengq/sai2/core/sai2-primitives/src/perception/Sai2Model.h
-Eigen/Dense
--
-string
 -
 
 /home/yimengq/sai2/core/sai2-primitives/src/primitives/RedundantArmMotion.h
@@ -1734,20 +1674,6 @@ chrono
 trajectory_generation/OTG_ori.h
 /home/yimengq/sai2/core/sai2-primitives/src/tasks/trajectory_generation/OTG_ori.h
 
-/home/yimengq/sai2/core/sai2-primitives/src/tasks/PartialJointTask.h
-Sai2Model.h
-/home/yimengq/sai2/core/sai2-primitives/src/tasks/Sai2Model.h
-TemplateTask.h
-/home/yimengq/sai2/core/sai2-primitives/src/tasks/TemplateTask.h
-Eigen/Dense
--
-string
--
-chrono
--
-trajectory_generation/OTG.h
-/home/yimengq/sai2/core/sai2-primitives/src/tasks/trajectory_generation/OTG.h
-
 /home/yimengq/sai2/core/sai2-primitives/src/tasks/PosOriTask.h
 Sai2Model.h
 /home/yimengq/sai2/core/sai2-primitives/src/tasks/Sai2Model.h
@@ -1761,6 +1687,8 @@ chrono
 -
 queue
 -
+filters/ButterworthFilter.h
+/home/yimengq/sai2/core/sai2-primitives/src/tasks/filters/ButterworthFilter.h
 trajectory_generation/OTG_posori.h
 /home/yimengq/sai2/core/sai2-primitives/src/tasks/trajectory_generation/OTG_posori.h
 
@@ -1774,8 +1702,6 @@ Eigen/Dense
 string
 -
 chrono
--
-queue
 -
 trajectory_generation/OTG.h
 /home/yimengq/sai2/core/sai2-primitives/src/tasks/trajectory_generation/OTG.h
@@ -1791,22 +1717,6 @@ chrono
 -
 
 /home/yimengq/sai2/core/sai2-primitives/src/tasks/TwoHandTwoRobotsTask.h
-Sai2Model.h
-/home/yimengq/sai2/core/sai2-primitives/src/tasks/Sai2Model.h
-TemplateTask.h
-/home/yimengq/sai2/core/sai2-primitives/src/tasks/TemplateTask.h
-Eigen/Dense
--
-string
--
-chrono
--
-trajectory_generation/OTG.h
-/home/yimengq/sai2/core/sai2-primitives/src/tasks/trajectory_generation/OTG.h
-trajectory_generation/OTG_ori.h
-/home/yimengq/sai2/core/sai2-primitives/src/tasks/trajectory_generation/OTG_ori.h
-
-/home/yimengq/sai2/core/sai2-primitives/src/tasks/TwoHandTwoRobotsTaskNonRigid.h
 Sai2Model.h
 /home/yimengq/sai2/core/sai2-primitives/src/tasks/Sai2Model.h
 TemplateTask.h

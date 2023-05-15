@@ -1,4 +1,4 @@
-/home/yimengq/sai2/apps/cs225a/FinalProject/Airhockey/build/CMakeFiles/rebuild_cache.dir
-/home/yimengq/sai2/apps/cs225a/FinalProject/Airhockey/build/CMakeFiles/edit_cache.dir
-/home/yimengq/sai2/apps/cs225a/FinalProject/Airhockey/build/CMakeFiles/simviz.dir
-/home/yimengq/sai2/apps/cs225a/FinalProject/Airhockey/build/CMakeFiles/controller.dir
+/home/yimengq/sai2/apps/cs225a/cs225a-air-hockey/Airhockey/build/CMakeFiles/rebuild_cache.dir
+/home/yimengq/sai2/apps/cs225a/cs225a-air-hockey/Airhockey/build/CMakeFiles/edit_cache.dir
+/home/yimengq/sai2/apps/cs225a/cs225a-air-hockey/Airhockey/build/CMakeFiles/simviz.dir
+/home/yimengq/sai2/apps/cs225a/cs225a-air-hockey/Airhockey/build/CMakeFiles/controller.dir

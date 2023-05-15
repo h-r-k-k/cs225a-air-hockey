@@ -1,4 +1,4 @@
-# Install script for directory: /home/yimengq/sai2/apps/cs225a/FinalProject/Airhockey
+# Install script for directory: /home/yimengq/sai2/apps/cs225a/cs225a-air-hockey/Airhockey
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/yimengq/sai2/apps/cs225a/FinalProject/Airhockey/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/yimengq/sai2/apps/cs225a/cs225a-air-hockey/Airhockey/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
