@@ -32,7 +32,7 @@ const string base_link_name = "link0";
 const string ee_link_name = "link7";
 
 // dynamic objects information
-const vector<string> object_names = {};
+const vector<string> object_names = {"puck"};
 vector<Vector3d> object_pos;
 vector<Vector3d> object_lin_vel;
 vector<Quaterniond> object_ori;

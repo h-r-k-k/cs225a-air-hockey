@@ -26,7 +26,7 @@
 	    </collision>
 	</static_object>
 
-	<static_object name="Table">
+	<!-- <static_object name="Table">
 		<origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
 		<inertial>
         	<origin xyz="0 0 0" rpy="0 0 0" />
@@ -51,13 +51,187 @@
 	        </material>
 	    </visual>
 
+	</static_object> -->
+
+	<static_object name="Table">
+		<origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+		<inertial>
+        	<origin xyz="0 0 0" rpy="0 0 0" />
+        	<mass value="10" />
+        	<inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+      	</inertial>
+
+	    <!-- <visual>
+	        <origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="./resources/model/test_objects/meshes/visual/AirHockeyTable.obj" scale="1.0 1.0 1.0" />
+	        </geometry>
+	    </visual> -->
+
+		<!-- Below is the added visual box -->
+		<visual>
+	        <origin xyz="0 0 0.2625" rpy="0 0 0" />
+	        <geometry>
+	            <box size="1.53 0.60 0.525" />
+	        </geometry>
+	        <material name="material">
+		        <color rgba="0.235 0.702 0.443 0.5" />
+	        </material>
+	    </visual>
+
+		<visual>
+	        <origin xyz="0 0.35 0.545" rpy="0 0 0" />
+	        <geometry>
+	            <box size="1.53 0.09 0.05" />
+	        </geometry>
+	        <material name="material">
+		        <color rgba="0.235 0.702 0.443 0.5" />
+	        </material>
+	    </visual>
+
+		<visual>
+	        <origin xyz="0 -0.35 0.545" rpy="0 0 0" />
+	        <geometry>
+	            <box size="1.53 0.09 0.05" />
+	        </geometry>
+	        <material name="material">
+		        <color rgba="0.235 0.702 0.443 0.5" />
+	        </material>
+	    </visual>
+<!-- 
+		<visual>
+	        <origin xyz="0.72 0.2125 0.545" rpy="0 0 0" />
+	        <geometry>
+	            <box size="0.09 0.185 0.05" />
+	        </geometry>
+	        <material name="material">
+		        <color rgba="0.235 0.702 0.443 0.5" />
+	        </material>
+	    </visual>
+
+		<visual>
+	        <origin xyz="0.72 -0.2125 0.545" rpy="0 0 0" />
+	        <geometry>
+	            <box size="0.09 0.185 0.05" />
+	        </geometry>
+	        <material name="material">
+		        <color rgba="0.235 0.702 0.443 0.5" />
+	        </material>
+	    </visual>
+
+		<visual>
+	        <origin xyz="-0.72 0.2125 0.545" rpy="0 0 0" />
+	        <geometry>
+	            <box size="0.09 0.185 0.05" />
+	        </geometry>
+	        <material name="material">
+		        <color rgba="0.235 0.702 0.443 0.5" />
+	        </material>
+	    </visual>
+
+		<visual>
+	        <origin xyz="-0.72 -0.2125 0.545" rpy="0 0 0" />
+	        <geometry>
+	            <box size="0.09 0.185 0.05" />
+	        </geometry>
+	        <material name="material">
+		        <color rgba="0.235 0.702 0.443 0.5" />
+	        </material>
+	    </visual> -->
+
 	    <!-- <collision>
 	        <origin xyz="0 0 0.06" rpy="0 0 0" />
 	        <geometry>
-	            <box size="0.1 0.1 0.15" />
+	            <box size="1.25 0.6 0.55" />
+	        </geometry>
+	    </collision> -->
+
+		<!-- Newly added collision box -->
+		<collision>
+	        <origin xyz="0 0 0.2625" rpy="0 0 0" />
+	        <geometry>
+	            <box size="1.53 0.6 0.525" />
+	        </geometry>
+	    </collision>
+
+		<collision>
+	        <origin xyz="0 0.35 0.545" rpy="0 0 0" />
+	        <geometry>
+	            <box size="1.53 0.09 0.05" />
+	        </geometry>
+	    </collision>
+
+		<!-- <collision>
+	        <origin xyz="0 -0.35 0.545" rpy="0 0 0" />
+	        <geometry>
+	            <box size="1.53 0.09 0.05" />
+	        </geometry>
+	    </collision> -->
+
+		<!-- <collision>
+	        <origin xyz="0.72 0.2125 0.545" rpy="0 0 0" />
+	        <geometry>
+	            <box size="0.09 0.185 0.05" />
+	        </geometry>
+	    </collision>
+
+		<collision>
+	        <origin xyz="0.72 -0.2125 0.545" rpy="0 0 0" />
+	        <geometry>
+	            <box size="0.09 0.185 0.05" />
+	        </geometry>
+	    </collision>
+
+		<collision>
+	        <origin xyz="-0.72 0.2125 0.545" rpy="0 0 0" />
+	        <geometry>
+	            <box size="0.09 0.185 0.05" />
+	        </geometry>
+	    </collision>
+
+		<collision>
+	        <origin xyz="-0.72 -0.2125 0.545" rpy="0 0 0" />
+	        <geometry>
+	            <box size="0.09 0.185 0.05" />
 	        </geometry>
 	    </collision> -->
 	</static_object>
+
+	<dynamic_object name="puck">
+		<origin xyz="0.0 0.0 1.5" rpy="0 0 0" />
+		<inertial>
+        	<origin xyz="0 0 0" rpy="0 0 0" />
+        	<mass value="10" />
+        	<inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+      	</inertial>
+
+	    <visual>
+	        <origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="./resources/model/test_objects/meshes/visual/puck.obj" scale="1.0 1.0 1.0" />
+	        </geometry>
+		    <material name="material">
+		        <color rgba="1 1 0.5" />
+	        </material>
+	    </visual>
+
+		<!-- <visual>
+	        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+	        <geometry>
+	            <cylinder length="0.01" radius="0.05"/>
+	        </geometry>
+	        <material name="material">
+		        <color rgba="1 1 1 1.0" />
+	        </material>
+	    </visual> -->
+
+	    <collision>
+	        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+	        <geometry>
+	            <cylinder length="0.01" radius="0.05"/>
+	        </geometry>
+	    </collision>
+	</dynamic_object>
 
 	<light name="light1" type="directional">
 		<position xyz="2.0 -2.0 2.0" />
