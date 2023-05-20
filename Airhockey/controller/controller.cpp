@@ -66,22 +66,29 @@ int main() {
 	posori_task->_use_velocity_saturation_flag = true;
 
 	VectorXd posori_task_torques = VectorXd::Zero(dof);
-	posori_task->_kp_pos = 400.0;
-	posori_task->_kv_pos = 40.0;
-	posori_task->_kp_ori = 400.0;
+	posori_task->_kp_pos = 100.0;
+	posori_task->_kv_pos = 50.0;
+	posori_task->_kp_ori = 100.0;
 	posori_task->_kv_ori = 40.0;
+
+	// set the current EE posiiton as the desired EE position
+	Vector3d x_desired = Vector3d::Zero(3);
+	robot->position(x_desired, control_link, control_point);
+	Vector3d x_init = x_desired;
+	cout<< "x_init" << x_init << endl;
 
 	// joint task
 	auto joint_task = new Sai2Primitives::JointTask(robot);
 	joint_task->_use_interpolation_flag = true;
 	joint_task->_use_velocity_saturation_flag = true;
+	joint_task->_saturation_velocity << 0.2,0.2,0.2;
 
 	VectorXd joint_task_torques = VectorXd::Zero(dof);
 	joint_task->_kp = 400.0;
 	joint_task->_kv = 40.0;
 
 	VectorXd q_init_desired(dof);
-	q_init_desired << -30.0, -15.0, -15.0, -105.0, 0.0, 90.0, 45.0;
+	q_init_desired << 30.0, -15.0, -15.0, -105.0, 0.0, 90.0, 45.0;
 	q_init_desired *= M_PI/180.0;
 	joint_task->_desired_position = q_init_desired;
 
@@ -124,31 +131,41 @@ int main() {
 		robot->updateModel();
 	
 		if (state == POSTURE) {
+
+
+
 			// update task model and set hierarchy
-			N_prec.setIdentity();
-			joint_task->updateTaskModel(N_prec);
+			// N_prec.setIdentity();
+			// joint_task->updateTaskModel(N_prec);
 
-			// compute torques
-			joint_task->computeTorques(joint_task_torques);
-			command_torques = joint_task_torques;
+			// // compute torques
+			// joint_task->computeTorques(joint_task_torques);
+			// command_torques = joint_task_torques;
 
-			if ( (robot->_q - q_init_desired).norm() < 0.15 ) {
-				cout << "Posture To Motion" << endl;
-				joint_task->reInitializeTask();
-				posori_task->reInitializeTask();
-				robot->position(ee_pos, control_link, control_point);
-				posori_task->_desired_position = ee_pos - Vector3d(-0.1, -0.1, 0.1);
-				posori_task->_desired_orientation = AngleAxisd(M_PI/6, Vector3d::UnitX()).toRotationMatrix() * posori_task->_desired_orientation;
-				// posori_task->_desired_orientation = AngleAxisd(0.0000000000000001, Vector3d::UnitX()).toRotationMatrix() * posori_task->_desired_orientation;
+			// if ( (robot->_q - q_init_desired).norm() < 0.15 ) {
+			// 	cout << "Posture To Motion" << endl;
+			// 	joint_task->reInitializeTask();
+			// 	posori_task->reInitializeTask();
+			// 	robot->position(ee_pos, control_link, control_point);
+			// 	posori_task->_desired_position = ee_pos - Vector3d(-0.1, -0.1, 0.1);
+			// 	posori_task->_desired_orientation = AngleAxisd(M_PI/6, Vector3d::UnitX()).toRotationMatrix() * posori_task->_desired_orientation;
+			// 	// posori_task->_desired_orientation = AngleAxisd(0.0000000000000001, Vector3d::UnitX()).toRotationMatrix() * posori_task->_desired_orientation;
 
 				state = MOTION;
-			}
+			// }
 		} else if (state == MOTION) {
+			// sample desired set points
+			x_desired = x_init + Vector3d(0.6, 0.0, -0.4);
+			// set controller inputs
+			posori_task->_desired_position = x_desired;
+			joint_task->_desired_position = q_init_desired;
+
 			// update task model and set hierarchy
 			N_prec.setIdentity();
 			posori_task->updateTaskModel(N_prec);
 			N_prec = posori_task->_N;
 			joint_task->updateTaskModel(N_prec);
+
 
 			// compute torques
 			posori_task->computeTorques(posori_task_torques);

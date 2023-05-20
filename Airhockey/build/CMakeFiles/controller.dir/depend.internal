@@ -177,16 +177,24 @@ CMakeFiles/controller.dir/controller/controller.cpp.o
  /home/yimengq/sai2/core/sai2-primitives/src/Sai2Primitives.h
  /home/yimengq/sai2/core/sai2-primitives/src/haptic_tasks/BilateralPassivityController.h
  /home/yimengq/sai2/core/sai2-primitives/src/haptic_tasks/HapticController.h
+ /home/yimengq/sai2/core/sai2-primitives/src/haptic_tasks/ImpedanceControl.h
  /home/yimengq/sai2/core/sai2-primitives/src/haptic_tasks/OpenLoopTeleop.h
+ /home/yimengq/sai2/core/sai2-primitives/src/haptic_tasks/PositionControl.h
+ /home/yimengq/sai2/core/sai2-primitives/src/humanoid/FloatingBaseContactModel.h
+ /home/yimengq/sai2/core/sai2-primitives/src/humanoid/InternalForceSelectionBarrierMethod.h
+ /home/yimengq/sai2/core/sai2-primitives/src/perception/ForceSpaceParticleFilter.h
+ /home/yimengq/sai2/core/sai2-primitives/src/perception/MomentumObserver.h
  /home/yimengq/sai2/core/sai2-primitives/src/primitives/RedundantArmMotion.h
  /home/yimengq/sai2/core/sai2-primitives/src/primitives/SurfaceSurfaceAlignment.h
  /home/yimengq/sai2/core/sai2-primitives/src/primitives/TemplatePrimitive.h
  /home/yimengq/sai2/core/sai2-primitives/src/tasks/JointTask.h
  /home/yimengq/sai2/core/sai2-primitives/src/tasks/OrientationTask.h
+ /home/yimengq/sai2/core/sai2-primitives/src/tasks/PartialJointTask.h
  /home/yimengq/sai2/core/sai2-primitives/src/tasks/PosOriTask.h
  /home/yimengq/sai2/core/sai2-primitives/src/tasks/PositionTask.h
  /home/yimengq/sai2/core/sai2-primitives/src/tasks/TemplateTask.h
  /home/yimengq/sai2/core/sai2-primitives/src/tasks/TwoHandTwoRobotsTask.h
+ /home/yimengq/sai2/core/sai2-primitives/src/tasks/TwoHandTwoRobotsTaskNonRigid.h
  /home/yimengq/sai2/core/sai2-primitives/src/trajectory_generation/OTG.h
  /home/yimengq/sai2/core/sai2-primitives/src/trajectory_generation/OTG_ori.h
  /home/yimengq/sai2/core/sai2-primitives/src/trajectory_generation/OTG_posori.h
