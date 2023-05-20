@@ -5,7 +5,7 @@ import cv2
     2.8" (0.07112 m) square for chessboard (9-1=8 x 6-1=5)
 """
 
-cam = cv2.VideoCapture(1)  # change ID for external video 
+cam = cv2.VideoCapture(0)  # change ID for external video 
 
 cv2.namedWindow("test")
 
@@ -25,8 +25,9 @@ while True:
         break
     elif k%256 == 32:
         # SPACE pressed
-        img_name = "./images/chessboard_{}.png".format(img_counter)
-        cv2.imwrite(img_name, frame)
+        img_name = "/Users/pmuthu/Desktop/Stanford/CS225A/calibration/chessboard_{}.png".format(img_counter)
+        worked = cv2.imwrite(img_name, frame)
+        print("Worked?: ", worked)
         print("{} written!".format(img_name))
         img_counter += 1
 

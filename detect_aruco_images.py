@@ -40,6 +40,6 @@ detected_markers = aruco_display(corners, ids, rejected, image)
 cv2.imshow("Image", detected_markers)
 
 # # Uncomment to save
-# cv2.imwrite("output_sample.png",detected_markers)
+cv2.imwrite("output_sample.png",detected_markers)
 
 cv2.waitKey(0)

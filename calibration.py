@@ -29,6 +29,7 @@ def calibrate(dirpath, square_size, width, height, visualize=False):
 
     for fname in images:
         img = cv2.imread(os.path.join(dirpath, fname))
+        print(os.path.join(dirpath, fname))
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
         # Find the chess board corners
