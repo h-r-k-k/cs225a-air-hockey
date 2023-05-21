@@ -155,7 +155,7 @@ int main() {
 			// }
 		} else if (state == MOTION) {
 			// sample desired set points
-			x_desired = x_init + Vector3d(0.6, 0.0, -0.4);
+			x_desired = x_init + Vector3d(0.6, 0.0, -0.7);
 			// set controller inputs
 			posori_task->_desired_position = x_desired;
 			joint_task->_desired_position = q_init_desired;
