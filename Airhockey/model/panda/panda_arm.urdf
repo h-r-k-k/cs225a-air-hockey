@@ -131,10 +131,28 @@
           <mesh filename="meshes/visual/link7.obj"/>
         </geometry>
       </visual>
-      <collision>
+      <visual>
+        <origin xyz="0 0 0.17" rpy="0 0 0" />
         <geometry>
-          <mesh filename="./meshes/collision/link7.obj"/>
+          <mesh filename="meshes/visual/mallet_ver1.obj"/>
         </geometry>
+      </visual>
+
+      <!-- visual of collision box -->
+      <!-- <visual>
+        <origin xyz="0 0 0.11" rpy="0 0 0" />
+	        <geometry>
+	          <cylinder radius="0.055" length="0.09" />
+	        </geometry>
+      </visual> -->
+      <collision>
+        <!-- <geometry>
+          <mesh filename="./meshes/collision/link7.obj"/>
+        </geometry> -->
+        <origin xyz="0 0 0.11" rpy="0 0 0" />
+	      <geometry>
+	          <cylinder radius="0.055" length="0.09" />
+	      </geometry>
       </collision>
     </link>
     <joint name="joint1" type="revolute">
