@@ -199,6 +199,15 @@ int main() {
 				state = MOTION;
 			}
 		} else if (state == MOTION) {
+<<<<<<< HEAD
+=======
+			// sample desired set points
+			x_desired = x_init + Vector3d(0.6, 0.0, -0.7);
+			// set controller inputs
+			posori_task->_desired_position = x_desired;
+			joint_task->_desired_position = q_init_desired;
+
+>>>>>>> 9a387b4292b6544a6464f13a1aabb07f9746c256
 			// update task model and set hierarchy
 			N_prec.setIdentity();
 			posori_task->updateTaskModel(N_prec);

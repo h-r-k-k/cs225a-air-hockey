@@ -2,6 +2,7 @@ file(REMOVE_RECURSE
   "../bin/simviz"
   "../bin/simviz.pdb"
   "CMakeFiles/simviz.dir/simulation/simviz.cpp.o"
+  "CMakeFiles/simviz.dir/simulation/simviz.cpp.o.d"
 )
 
 # Per-language clean rules from dependency scanning.
