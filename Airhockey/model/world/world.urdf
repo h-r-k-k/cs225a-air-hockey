@@ -4,7 +4,7 @@
 
 	<robot name="panda">
 		<model dir="./resources/model/panda" path="panda_arm.urdf" name="panda" scale="1.0 1.0 1.0"/>
-		<origin xyz="-1.3 0.0 0.0" rpy="0 0 0" />
+		<origin xyz="-1.0 0.0 0.0" rpy="0 0 0" />
 	</robot>
 
 	<static_object name="Base">
@@ -69,12 +69,12 @@
 	    </visual>
 
 		<!-- Below is the visualization for the collision box -->
-		<visual>
+		<!-- <visual>
 	        <origin xyz="0 0 0" rpy="0 0 0" />
 			<geometry>
 				<mesh filename="./resources/model/test_objects/meshes/collision/collision_box_base_only.obj" scale="1.0 1.0 1.0" />
 	        </geometry>
-	    </visual>
+	    </visual> -->
 
 		<!-- <visual>
 	        <origin xyz="0 0 0" rpy="0 0 0" />
@@ -164,7 +164,7 @@
 
 		<!-- Newly added collision box -->
 		<collision>
-	        <origin xyz="0 0 0" rpy="0 0 0" />
+	        <origin xyz="0 0 0.02" rpy="0 0 0" />
 			<geometry>
 				<mesh filename="./resources/model/test_objects/meshes/collision/collision_box_base_only.obj" scale="1.0 1.0 1.0" />
 	        </geometry>
@@ -185,12 +185,12 @@
 
 		<!-- Below is the visualization for the collision box -->
 
-		<visual>
+		<!-- <visual>
 	        <origin xyz="0 0 0" rpy="0 0 0" />
 			<geometry>
 				<mesh filename="./resources/model/test_objects/meshes/collision/collision_box_left_edge_only.obj" scale="1.0 1.0 1.0" />
 	        </geometry>
-	    </visual>
+	    </visual> -->
 
 		<!-- Newly added collision box -->
 
@@ -207,12 +207,12 @@
 
 		<!-- Below is the visualization for the collision box -->
 
-		<visual>
+		<!-- <visual>
 	        <origin xyz="0 0 0" rpy="0 0 0" />
 			<geometry>
 				<mesh filename="./resources/model/test_objects/meshes/collision/collision_box_right_edge_only.obj" scale="1.0 1.0 1.0" />
 	        </geometry>
-	    </visual>
+	    </visual> -->
 
 		<!-- Newly added collision box -->
 
@@ -225,10 +225,10 @@
 	</static_object>
 
 	<dynamic_object name="puck">
-		<origin xyz="0.0 0.0 1.5" rpy="0 0 0" />
+		<origin xyz="-0.23 0.0 5" rpy="0 0 0" />
 		<inertial>
         	<origin xyz="0 0 0" rpy="0 0 0" />
-        	<mass value="10" />
+        	<mass value="0.1" />
         	<inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
       	</inertial>
 
@@ -242,7 +242,7 @@
 	        </material>
 	    </visual>
 
-		<visual>
+		<!-- <visual>
 			<origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
 	        <geometry>
 	            <cylinder length="0.01" radius="0.05"/>
@@ -250,7 +250,7 @@
 			<material name="material">
 		        <color rgba="0.235 0.702 0.443 0.5" />
 	        </material>
-		</visual>
+		</visual> -->
 
 
 	    <collision>
