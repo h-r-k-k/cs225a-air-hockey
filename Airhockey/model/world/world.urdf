@@ -164,7 +164,7 @@
 
 		<!-- Newly added collision box -->
 		<collision>
-	        <origin xyz="0 0 0.02" rpy="0 0 0" />
+	        <origin xyz="0 0 0.01" rpy="0 0 0" />
 			<geometry>
 				<mesh filename="./resources/model/test_objects/meshes/collision/collision_box_base_only.obj" scale="1.0 1.0 1.0" />
 	        </geometry>
@@ -225,7 +225,7 @@
 	</static_object>
 
 	<dynamic_object name="puck">
-		<origin xyz="-0.23 0.0 5" rpy="0 0 0" />
+		<origin xyz="-0.30 0.0 5" rpy="0 0 0" />
 		<inertial>
         	<origin xyz="0 0 0" rpy="0 0 0" />
         	<mass value="0.1" />

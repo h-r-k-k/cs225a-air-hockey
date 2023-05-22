@@ -29,7 +29,8 @@ const string robot_file = "./resources/model/panda/panda_arm.urdf";
 enum State 
 {
 	POSTURE = 0, 
-	MOTION
+	DEFEND = 1,
+	ATTACK = 2	
 };
 
 int main() {
@@ -60,7 +61,7 @@ int main() {
 
 	// pose task
 	const string control_link = "link7";
-	const Vector3d control_point = Vector3d(0, 0, 0.07);
+	const Vector3d control_point = Vector3d(0, 0, 0.145);
 	auto posori_task = new Sai2Primitives::PosOriTask(robot, control_link, control_point);
 	posori_task->_use_interpolation_flag = true;
 	posori_task->_use_velocity_saturation_flag = false;
@@ -70,6 +71,7 @@ int main() {
 	posori_task->_kv_pos = 50.0;
 	posori_task->_kp_ori = 100.0;
 	posori_task->_kv_ori = 40.0;
+
 
 	// set the current EE posiiton as the desired EE position
 	Vector3d x_desired = Vector3d::Zero(3);
@@ -84,7 +86,7 @@ int main() {
 	// joint_task->_saturation_velocity << 0.2,0.2,0.2;
 
 	VectorXd joint_task_torques = VectorXd::Zero(dof);
-	joint_task->_kp = 600.0;
+	joint_task->_kp = 300.0;
 	joint_task->_kv = 40.0;
 
 	VectorXd q_init_desired(dof);
@@ -120,6 +122,9 @@ int main() {
 	unsigned long long counter = 0;
 
 	runloop = true;
+
+	// Temp Variable
+	double stay_timer = 0.0;
 
 	while (runloop) {
 		// wait for next scheduled loop
@@ -185,29 +190,24 @@ int main() {
 			command_torques = joint_task_torques;
 
 			if ( (robot->_q - q_init_desired).norm() < 0.15 ) {
-				cout << "Posture To Motion" << endl;
-				joint_task->reInitializeTask();
+				cout << "Posture to Defend Mode" << endl;
+				// joint_task->reInitializeTask();
 				posori_task->reInitializeTask();
 				robot->position(ee_pos, control_link, control_point);
 				// posori_task->_desired_position =   x_init + Vector3d(0.2, 0.0, -0.4);
 				// cout << posori_task->_desired_position << "\n" << endl;
-				posori_task->_desired_position =  Vector3d(0.85, 0.05, 0.53);
-				posori_task->_desired_velocity =  Vector3d(0.1, 0.3, 0.0);
+				posori_task->_desired_position =  Vector3d(0.4, 0.15, 0.56); // x: 0.3 ~ 0.6(edge at blue line)
 				// posori_task->_desired_orientation = AngleAxisd(M_PI/6, Vector3d::UnitX()).toRotationMatrix() * posori_task->_desired_orientation;
 				posori_task->_desired_orientation = AngleAxisd(0.0000000000000001, Vector3d::UnitX()).toRotationMatrix() * posori_task->_desired_orientation;
 
-				state = MOTION;
+				state = DEFEND;
 			}
-		} else if (state == MOTION) {
-<<<<<<< HEAD
-=======
-			// sample desired set points
-			x_desired = x_init + Vector3d(0.6, 0.0, -0.7);
-			// set controller inputs
-			posori_task->_desired_position = x_desired;
-			joint_task->_desired_position = q_init_desired;
-
->>>>>>> 9a387b4292b6544a6464f13a1aabb07f9746c256
+		} else if (state == DEFEND) {
+			cout <<"time:" << time << "  (At Defend State)" << endl;
+			if (stay_timer == 0.0) {
+				stay_timer = time;
+			}
+			
 			// update task model and set hierarchy
 			N_prec.setIdentity();
 			posori_task->updateTaskModel(N_prec);
@@ -218,6 +218,30 @@ int main() {
 			posori_task->computeTorques(posori_task_torques);
 			joint_task->computeTorques(joint_task_torques);
 			command_torques = posori_task_torques + joint_task_torques;
+
+			if (time >= (stay_timer + 5.0)) {
+				joint_task->reInitializeTask();
+				posori_task->reInitializeTask();
+				state = ATTACK;
+			}
+			
+		} else if (state == ATTACK) {
+			cout << "At Attack State" << endl;
+			robot->position(ee_pos, control_link, control_point);
+			posori_task->_desired_position =  Vector3d(0.7, 0.0, 0.56); // x: 0.3 ~ 0.6(edge at blue line)
+			posori_task->_desired_orientation = AngleAxisd(0.0000000000000001, Vector3d::UnitX()).toRotationMatrix() * posori_task->_desired_orientation;
+
+			// update task model and set hierarchy
+			N_prec.setIdentity();
+			posori_task->updateTaskModel(N_prec);
+			N_prec = posori_task->_N;
+			joint_task->updateTaskModel(N_prec);
+
+			// compute torques
+			posori_task->computeTorques(posori_task_torques);
+			joint_task->computeTorques(joint_task_torques);
+			command_torques = posori_task_torques + joint_task_torques;
+		
 		}
 
 

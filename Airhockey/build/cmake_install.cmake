@@ -1,4 +1,4 @@
-# Install script for directory: /home/hrk1020/sai2/apps/cs225a/FinalProject/cs225a-air-hockey/Airhockey
+# Install script for directory: /home/yimengq/sai2/apps/cs225a/FinalProject/Airhockey
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -37,11 +37,6 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "FALSE")
 endif()
 
-# Set default install directory permissions.
-if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "/usr/bin/objdump")
-endif()
-
 if(CMAKE_INSTALL_COMPONENT)
   set(CMAKE_INSTALL_MANIFEST "install_manifest_${CMAKE_INSTALL_COMPONENT}.txt")
 else()
@@ -50,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/hrk1020/sai2/apps/cs225a/FinalProject/cs225a-air-hockey/Airhockey/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/yimengq/sai2/apps/cs225a/FinalProject/Airhockey/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
