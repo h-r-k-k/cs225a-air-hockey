@@ -5,9 +5,15 @@
  */
 
 #include <Sai2Model.h>
+#include "Sai2Graphics.h"
+#include "Sai2Simulation.h"
 #include "Sai2Primitives.h"
-#include "redis/RedisClient.h"
 #include "timer/LoopTimer.h"
+#include <GL/glew.h>
+#include <dynamics3d.h>
+#include "redis/RedisClient.h"
+#include <GLFW/glfw3.h>  // must be loaded after loading opengl/glew
+#include <signal.h>
 
 #include <iostream>
 #include <string>
@@ -34,6 +40,14 @@ enum State
 };
 
 int main() {
+	// From simulation
+	// dynamic objects information
+	const vector<string> object_names = {"puck"};
+	vector<Vector3d> object_pos;
+	vector<Vector3d> object_lin_vel;
+	vector<Quaterniond> object_ori;
+	vector<Vector3d> object_ang_vel;
+	const int n_objects = object_names.size();
 
 	// initial state 
 	int state = POSTURE;
@@ -63,15 +77,19 @@ int main() {
 	const string control_link = "link7";
 	const Vector3d control_point = Vector3d(0, 0, 0.145);
 	auto posori_task = new Sai2Primitives::PosOriTask(robot, control_link, control_point);
-	posori_task->_use_interpolation_flag = true;
+	posori_task->_use_interpolation_flag = false;
 	posori_task->_use_velocity_saturation_flag = false;
 
 	VectorXd posori_task_torques = VectorXd::Zero(dof);
 	posori_task->_kp_pos = 300.0;
 	posori_task->_kv_pos = 50.0;
-	posori_task->_kp_ori = 100.0;
-	posori_task->_kv_ori = 40.0;
+	posori_task->_kp_ori = 200.0;
+	posori_task->_kv_ori = 30.0;
 
+	Matrix3d desired_orientation;
+	desired_orientation << 	1,  0,  0,
+							0, -1,  0,
+							0,  0, -1;
 
 	// set the current EE posiiton as the desired EE position
 	Vector3d x_desired = Vector3d::Zero(3);
@@ -90,7 +108,6 @@ int main() {
 	joint_task->_kv = 40.0;
 
 	VectorXd q_init_desired(dof);
-	// q_init_desired << 30.0, -15.0, -15.0, -105.0, 0.0, 90.0, 45.0;
 	q_init_desired << 0.0, 0.0, 0.0, -90.0, 0.0, 90.0, 0.0;
 
 	q_init_desired *= M_PI/180.0;
@@ -136,49 +153,17 @@ int main() {
 
 		// update model
 		robot->updateModel();
-	
-		// if (state == POSTURE) {
 
+		// update puck velocity
+		int i = 0;
+		Vector3d Pos;
+		Vector3d Vel;
 
+		Pos = redis_client.getEigenMatrixJSON(Puck_Pos);
+		Vel = redis_client.getEigenMatrixJSON(Puck_Vel);
 
-		// 	// update task model and set hierarchy
-		// 	// N_prec.setIdentity();
-		// 	// joint_task->updateTaskModel(N_prec);
-
-		// 	// // compute torques
-		// 	// joint_task->computeTorques(joint_task_torques);
-		// 	// command_torques = joint_task_torques;
-
-		// 	// if ( (robot->_q - q_init_desired).norm() < 0.15 ) {
-		// 	// 	cout << "Posture To Motion" << endl;
-		// 	// 	joint_task->reInitializeTask();
-		// 	// 	posori_task->reInitializeTask();
-		// 	// 	robot->position(ee_pos, control_link, control_point);
-		// 	// 	posori_task->_desired_position = ee_pos - Vector3d(-0.1, -0.1, 0.1);
-		// 	// 	posori_task->_desired_orientation = AngleAxisd(M_PI/6, Vector3d::UnitX()).toRotationMatrix() * posori_task->_desired_orientation;
-		// 	// 	// posori_task->_desired_orientation = AngleAxisd(0.0000000000000001, Vector3d::UnitX()).toRotationMatrix() * posori_task->_desired_orientation;
-
-		// 		state = MOTION;
-		// 	// }
-		// } else if (state == MOTION) {
-		// 	// sample desired set points
-		// 	x_desired = x_init + Vector3d(0.7, 0.0, -0.4);
-		// 	// set controller inputs
-		// 	posori_task->_desired_position = x_desired;
-		// 	joint_task->_desired_position = q_init_desired;
-
-		// 	// update task model and set hierarchy
-		// 	N_prec.setIdentity();
-		// 	posori_task->updateTaskModel(N_prec);
-		// 	N_prec = posori_task->_N;
-		// 	joint_task->updateTaskModel(N_prec);
-
-		// 	// compute torques
-		// 	posori_task->computeTorques(posori_task_torques);
-		// 	joint_task->computeTorques(joint_task_torques);
-		// 	command_torques = posori_task_torques + joint_task_torques;
-
-		// }
+		cout << "Position of Puck is," << Pos[0] << "," << Pos[1] << "," << Pos[2] << endl;  
+		cout << "Velocity of Puck is," << Vel[0] << "," << Vel[1] << "," << Vel[2] << endl;  
 
 		if (state == POSTURE) {
 			// update task model and set hierarchy
@@ -196,9 +181,12 @@ int main() {
 				robot->position(ee_pos, control_link, control_point);
 				// posori_task->_desired_position =   x_init + Vector3d(0.2, 0.0, -0.4);
 				// cout << posori_task->_desired_position << "\n" << endl;
-				posori_task->_desired_position =  Vector3d(0.4, 0.15, 0.56); // x: 0.3 ~ 0.6(edge at blue line)
+				posori_task->_desired_position =  Vector3d(0.4, 0.1, 0.56); // x: 0.3 ~ 0.6(edge at blue line)
+				// posori_task->_desired_position =  Vector3d(0.4, 0.15, 0.6); // x: 0.3 ~ 0.6(edge at blue line)
 				// posori_task->_desired_orientation = AngleAxisd(M_PI/6, Vector3d::UnitX()).toRotationMatrix() * posori_task->_desired_orientation;
-				posori_task->_desired_orientation = AngleAxisd(0.0000000000000001, Vector3d::UnitX()).toRotationMatrix() * posori_task->_desired_orientation;
+				// posori_task->_desired_orientation = AngleAxisd(0.0000000000000001, Vector3d::UnitX()).toRotationMatrix() * posori_task->_desired_orientation;
+
+				posori_task->_desired_orientation = desired_orientation;
 
 				state = DEFEND;
 			}
@@ -228,8 +216,9 @@ int main() {
 		} else if (state == ATTACK) {
 			cout << "At Attack State" << endl;
 			robot->position(ee_pos, control_link, control_point);
-			posori_task->_desired_position =  Vector3d(0.7, 0.0, 0.56); // x: 0.3 ~ 0.6(edge at blue line)
-			posori_task->_desired_orientation = AngleAxisd(0.0000000000000001, Vector3d::UnitX()).toRotationMatrix() * posori_task->_desired_orientation;
+			posori_task->_desired_position =  Vector3d(0.7, 0.1, 0.56); // x: 0.3 ~ 0.6(edge at blue line)
+			posori_task->_desired_velocity =  Vector3d(0.3, 0.3, 0); // x: 0.3 ~ 0.6(edge at blue line)
+			posori_task->_desired_orientation = desired_orientation;
 
 			// update task model and set hierarchy
 			N_prec.setIdentity();
@@ -241,12 +230,10 @@ int main() {
 			posori_task->computeTorques(posori_task_torques);
 			joint_task->computeTorques(joint_task_torques);
 			command_torques = posori_task_torques + joint_task_torques;
+
+			state = DEFEND;
 		
 		}
-
-
-
-
 
 		// execute redis write callback
 		redis_client.executeWriteCallback(0);	

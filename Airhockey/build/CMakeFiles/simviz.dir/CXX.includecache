@@ -6,35 +6,35 @@
 
 #IncludeRegexTransform: 
 
-/home/yimengq/sai2/apps/cs225a/FinalProject/Airhockey/redis_keys.h
+/home/yimengq/sai2/apps/cs225a/cs225a-air-hockey/Airhockey/redis_keys.h
 
-/home/yimengq/sai2/apps/cs225a/FinalProject/Airhockey/simulation/object.h
+/home/yimengq/sai2/apps/cs225a/cs225a-air-hockey/Airhockey/simulation/object.h
 Sai2Graphics.h
-/home/yimengq/sai2/apps/cs225a/FinalProject/Airhockey/simulation/Sai2Graphics.h
+/home/yimengq/sai2/apps/cs225a/cs225a-air-hockey/Airhockey/simulation/Sai2Graphics.h
 
-/home/yimengq/sai2/apps/cs225a/FinalProject/Airhockey/simulation/simviz.cpp
+/home/yimengq/sai2/apps/cs225a/cs225a-air-hockey/Airhockey/simulation/simviz.cpp
 GL/glew.h
 -
 Sai2Model.h
-/home/yimengq/sai2/apps/cs225a/FinalProject/Airhockey/simulation/Sai2Model.h
+/home/yimengq/sai2/apps/cs225a/cs225a-air-hockey/Airhockey/simulation/Sai2Model.h
 Sai2Graphics.h
-/home/yimengq/sai2/apps/cs225a/FinalProject/Airhockey/simulation/Sai2Graphics.h
+/home/yimengq/sai2/apps/cs225a/cs225a-air-hockey/Airhockey/simulation/Sai2Graphics.h
 Sai2Simulation.h
-/home/yimengq/sai2/apps/cs225a/FinalProject/Airhockey/simulation/Sai2Simulation.h
+/home/yimengq/sai2/apps/cs225a/cs225a-air-hockey/Airhockey/simulation/Sai2Simulation.h
 dynamics3d.h
 -
 redis/RedisClient.h
-/home/yimengq/sai2/apps/cs225a/FinalProject/Airhockey/simulation/redis/RedisClient.h
+/home/yimengq/sai2/apps/cs225a/cs225a-air-hockey/Airhockey/simulation/redis/RedisClient.h
 timer/LoopTimer.h
-/home/yimengq/sai2/apps/cs225a/FinalProject/Airhockey/simulation/timer/LoopTimer.h
+/home/yimengq/sai2/apps/cs225a/cs225a-air-hockey/Airhockey/simulation/timer/LoopTimer.h
 GLFW/glfw3.h
 -
 signal.h
 -
 ../redis_keys.h
-/home/yimengq/sai2/apps/cs225a/FinalProject/Airhockey/redis_keys.h
+/home/yimengq/sai2/apps/cs225a/cs225a-air-hockey/Airhockey/redis_keys.h
 object.h
-/home/yimengq/sai2/apps/cs225a/FinalProject/Airhockey/simulation/object.h
+/home/yimengq/sai2/apps/cs225a/cs225a-air-hockey/Airhockey/simulation/object.h
 
 /home/yimengq/sai2/core/chai3d/external/glew/include/GL/glew.h
 stddef.h

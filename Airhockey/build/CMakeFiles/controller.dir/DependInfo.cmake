@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/yimengq/sai2/apps/cs225a/FinalProject/Airhockey/controller/controller.cpp" "/home/yimengq/sai2/apps/cs225a/FinalProject/Airhockey/build/CMakeFiles/controller.dir/controller/controller.cpp.o"
+  "/home/yimengq/sai2/apps/cs225a/cs225a-air-hockey/Airhockey/controller/controller.cpp" "/home/yimengq/sai2/apps/cs225a/cs225a-air-hockey/Airhockey/build/CMakeFiles/controller.dir/controller/controller.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

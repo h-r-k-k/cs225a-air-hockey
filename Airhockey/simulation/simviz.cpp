@@ -115,7 +115,7 @@ int main() {
 
     // set co-efficient of friction
     sim->setCoeffFrictionStatic(0.0);
-    sim->setCoeffFrictionDynamic(0.0);
+    sim->setCoeffFrictionDynamic(0.5);
 
 	/*------- Set up visualization -------*/
 	// set up error callback
@@ -339,6 +339,9 @@ void simulation(Sai2Model::Sai2Model* robot, Simulation::Sai2Simulation* sim)
 			sim->getObjectPosition(object_names[i], object_pos[i], object_ori[i]);
 			sim->getObjectVelocity(object_names[i], object_lin_vel[i], object_ang_vel[i]);
 		}
+		redis_client.setEigenMatrixJSON(Puck_Pos, object_pos[0]); 
+		redis_client.setEigenMatrixJSON(Puck_Vel, object_pos[0]); 
+
 
 		// execute redis write callback
 		redis_client.executeWriteCallback(0);		
