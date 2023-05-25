@@ -371,7 +371,7 @@ void simulation(Sai2Model::Sai2Model* robot, Sai2Model::Sai2Model* mallet, Simul
 			sim->getObjectVelocity(object_names[i], object_lin_vel[i], object_ang_vel[i]);
 		}
 		redis_client.setEigenMatrixJSON(Puck_Pos, object_pos[0]); 
-		redis_client.setEigenMatrixJSON(Puck_Vel, object_pos[0]); 
+		redis_client.setEigenMatrixJSON(Puck_Vel, object_lin_vel[0]); 
 
 
 		// execute redis write callback

@@ -15,4 +15,7 @@ const std::string MALLET_JOINT_ANGLES_KEY = "sai2::sim::mallet::q";
 const std::string MALLET_JOINT_VELOCITIES_KEY = "sai2::sim::mallet::dq";
 const std::string MALLET_JOINT_TORQUES_COMMAND_KEY = "sai2::sim::mallet::actuators::fgc";
 
+const std::string MALLET_X_POS_KEY = "mallet::x";
+const std::string MALLET_Y_POS_KEY = "mallet::y"; 
+const std::string MALLET_ORI_KEY = "mallet::theta";
 
