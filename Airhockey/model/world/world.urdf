@@ -7,6 +7,11 @@
 		<origin xyz="-1.0 0.0 0.0" rpy="0 0 0" />
 	</robot>
 
+	<robot name="mallet">
+		<model dir="./resources/model/test_objects" path="mallet.urdf" name="mallet" scale="1.0 1.0 1.0"/>
+		<origin xyz="0.55 0.0 0.56" rpy="0 0 0" />
+	</robot>
+
 	<static_object name="Base">
 		<origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
 	    <visual>

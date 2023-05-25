@@ -11,4 +11,8 @@ const std::string CONTROLLER_RUNNING_KEY = "sai2::sim::panda::controller";
 const std::string Puck_Pos = "sai2::sim::puck::pos";
 const std::string Puck_Vel = "sai2::sim::puck::vel";
 
+const std::string MALLET_JOINT_ANGLES_KEY = "sai2::sim::mallet::q";
+const std::string MALLET_JOINT_VELOCITIES_KEY = "sai2::sim::mallet::dq";
+const std::string MALLET_JOINT_TORQUES_COMMAND_KEY = "sai2::sim::mallet::actuators::fgc";
+
 

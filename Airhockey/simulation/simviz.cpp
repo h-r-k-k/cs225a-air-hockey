@@ -30,6 +30,12 @@ const string robot_name = "panda";
 const string camera_name = "camera_fixed";
 const string base_link_name = "link0";
 const string ee_link_name = "link7";
+const string mallet_ee_link_name = "link6";
+const string mallet_target_link_name = "link5";
+
+// mallet information
+const string mallet_file = "./resources/model/test_objects/mallet.urdf";
+const string mallet_name = "mallet";
 
 // dynamic objects information
 const vector<string> object_names = {"puck"};
@@ -43,7 +49,7 @@ const int n_objects = object_names.size();
 RedisClient redis_client; 
 
 // simulation thread
-void simulation(Sai2Model::Sai2Model* robot, Simulation::Sai2Simulation* sim);
+void simulation(Sai2Model::Sai2Model* robot, Sai2Model::Sai2Model* mallet, Simulation::Sai2Simulation* sim);
 
 // callback to print glfw errors
 void glfwError(int error, const char* description);
@@ -85,6 +91,7 @@ int main() {
 	graphics->getCameraPose(camera_name, camera_pos, camera_vertical, camera_lookat);
 	graphics->_world->setBackgroundColor(66.0/255, 135.0/255, 245.0/255);  // set blue background 	
 	graphics->showLinkFrame(true, robot_name, ee_link_name, 0.15);  // can add frames for different links
+	graphics->showLinkFrame(true, mallet_name, mallet_target_link_name, 0.1);  // can add frames for different links
 	graphics->getCamera(camera_name)->setClippingPlanes(0.1, 50);  // set the near and far clipping planes 
 
 	// load robots
@@ -93,10 +100,15 @@ int main() {
 	// robot->_dq = VectorXd::Zero(7);
 	robot->updateModel();
 
+	auto mallet = new Sai2Model::Sai2Model(mallet_file, false);
+	mallet->updateModel();
+
 	// load simulation world
 	auto sim = new Simulation::Sai2Simulation(world_file, false);
 	sim->setJointPositions(robot_name, robot->_q);
 	sim->setJointVelocities(robot_name, robot->_dq);
+	sim->setJointPositions(mallet_name, mallet->_q);
+	sim->setJointVelocities(mallet_name, mallet->_dq);
 
 	// fill in object information 
 	for (int i = 0; i < n_objects; ++i) {
@@ -111,10 +123,10 @@ int main() {
 	}
 
     // set co-efficient of restition to zero for force control
-    sim->setCollisionRestitution(0.0);
+    sim->setCollisionRestitution(0.05);
 
     // set co-efficient of friction
-    sim->setCoeffFrictionStatic(0.0);
+    sim->setCoeffFrictionStatic(0.1);
     sim->setCoeffFrictionDynamic(0.5);
 
 	/*------- Set up visualization -------*/
@@ -155,9 +167,12 @@ int main() {
 	redis_client.set(CONTROLLER_RUNNING_KEY, "0");  
 	redis_client.setEigenMatrixJSON(JOINT_ANGLES_KEY, robot->_q); 
 	redis_client.setEigenMatrixJSON(JOINT_VELOCITIES_KEY, robot->_dq); 
+	redis_client.setEigenMatrixJSON(MALLET_JOINT_ANGLES_KEY, mallet->_q);
+	redis_client.setEigenMatrixJSON(MALLET_JOINT_VELOCITIES_KEY, mallet->_dq);
+
 
 	// start simulation thread
-	thread sim_thread(simulation, robot, sim);
+	thread sim_thread(simulation, robot, mallet, sim);
 
 	// initialize glew
 	glewInitialize();
@@ -183,6 +198,7 @@ int main() {
 		int width, height;
 		glfwGetFramebufferSize(window, &width, &height);
 		graphics->updateGraphics(robot_name, robot); 
+		graphics->updateGraphics(mallet_name, mallet);
 		for (int i = 0; i < n_objects; ++i) {
 			graphics->updateObjectGraphics(object_names[i], object_pos[i], object_ori[i]);
 		}
@@ -276,7 +292,7 @@ int main() {
 
 //------------------------------------------------------------------------------
 
-void simulation(Sai2Model::Sai2Model* robot, Simulation::Sai2Simulation* sim)
+void simulation(Sai2Model::Sai2Model* robot, Sai2Model::Sai2Model* mallet, Simulation::Sai2Simulation* sim)
 {
 	// prepare simulation
 	int dof = robot->dof();
@@ -286,6 +302,12 @@ void simulation(Sai2Model::Sai2Model* robot, Simulation::Sai2Simulation* sim)
 	string controller_status = "0";
 	double kv = 10;  // can be set to 0 if no damping is needed
 
+	// prepare mallet simulation
+	int mallet_dof = mallet->dof();
+	VectorXd mallet_command_torques = VectorXd::Zero(mallet_dof);
+	redis_client.setEigenMatrixJSON(MALLET_JOINT_TORQUES_COMMAND_KEY, mallet_command_torques);
+	VectorXd mallet_g = VectorXd::Zero(mallet_dof);
+
 	// setup redis callback
 	redis_client.createReadCallback(0);
 	redis_client.createWriteCallback(0);
@@ -293,10 +315,13 @@ void simulation(Sai2Model::Sai2Model* robot, Simulation::Sai2Simulation* sim)
 	// add to read callback
 	redis_client.addStringToReadCallback(0, CONTROLLER_RUNNING_KEY, controller_status);
 	redis_client.addEigenToReadCallback(0, JOINT_TORQUES_COMMANDED_KEY, command_torques);
+	redis_client.addEigenToReadCallback(0, MALLET_JOINT_TORQUES_COMMAND_KEY, mallet_command_torques);
 
 	// add to write callback
 	redis_client.addEigenToWriteCallback(0, JOINT_ANGLES_KEY, robot->_q);
 	redis_client.addEigenToWriteCallback(0, JOINT_VELOCITIES_KEY, robot->_dq);
+	redis_client.addEigenToWriteCallback(0, MALLET_JOINT_ANGLES_KEY, mallet->_q);
+	redis_client.addEigenToWriteCallback(0, MALLET_JOINT_VELOCITIES_KEY, mallet->_dq);
 
 	// create a timer
 	LoopTimer timer;
@@ -316,12 +341,15 @@ void simulation(Sai2Model::Sai2Model* robot, Simulation::Sai2Simulation* sim)
 
 		// apply gravity compensation 
 		robot->gravityVector(g);
+		mallet->gravityVector(mallet_g);
 
 		// set joint torques
 		if (controller_status == "1") {
 			sim->setJointTorques(robot_name, command_torques + g);
+			sim->setJointTorques(mallet_name, mallet_command_torques + mallet_g);
 		} else {
 			sim->setJointTorques(robot_name, g - robot->_M * (kv * robot->_dq));
+			sim->setJointTorques(mallet_name, mallet_g - mallet->_M * (kv * mallet->_dq));
 		}
 
 		// integrate forward
@@ -333,6 +361,9 @@ void simulation(Sai2Model::Sai2Model* robot, Simulation::Sai2Simulation* sim)
 		sim->getJointPositions(robot_name, robot->_q);
 		sim->getJointVelocities(robot_name, robot->_dq);
 		robot->updateModel();
+		sim->getJointPositions(mallet_name, mallet->_q);
+		sim->getJointVelocities(mallet_name, mallet->_dq);
+		mallet->updateModel();
 
 		// get dynamic object positions
 		for (int i = 0; i < n_objects; ++i) {
