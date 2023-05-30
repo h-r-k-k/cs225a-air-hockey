@@ -91,7 +91,7 @@ int main() {
 	graphics->getCameraPose(camera_name, camera_pos, camera_vertical, camera_lookat);
 	graphics->_world->setBackgroundColor(66.0/255, 135.0/255, 245.0/255);  // set blue background 	
 	graphics->showLinkFrame(true, robot_name, ee_link_name, 0.15);  // can add frames for different links
-	graphics->showLinkFrame(true, mallet_name, mallet_target_link_name, 0.1);  // can add frames for different links
+	// graphics->showLinkFrame(true, mallet_name, mallet_target_link_name, 0.1);  // can add frames for different links
 	graphics->getCamera(camera_name)->setClippingPlanes(0.1, 50);  // set the near and far clipping planes 
 
 	// load robots
@@ -123,12 +123,15 @@ int main() {
 	}
 
     // set co-efficient of restition to zero for force control
-    sim->setCollisionRestitution(0.05);
+    // sim->setCollisionRestitution(0.05);
+    sim->setCollisionRestitution(0.90);
+    // sim->setCollisionRestitution(0.70);
 
     // set co-efficient of friction
-    sim->setCoeffFrictionStatic(0.1);
-    sim->setCoeffFrictionDynamic(0.5);
-
+    // sim->setCoeffFrictionStatic(0.1);
+    // sim->setCoeffFrictionDynamic(0.5);
+    sim->setCoeffFrictionStatic(0.0);
+    sim->setCoeffFrictionDynamic(0.0);
 	/*------- Set up visualization -------*/
 	// set up error callback
 	glfwSetErrorCallback(glfwError);

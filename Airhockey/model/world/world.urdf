@@ -185,52 +185,142 @@
 		
 	</static_object>
 
-	<static_object name="TableLeftEdge">
+	<static_object name="TableEdgeTop">
 		<origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
 
 		<!-- Below is the visualization for the collision box -->
 
-		<!-- <visual>
+		<visual>
 	        <origin xyz="0 0 0" rpy="0 0 0" />
 			<geometry>
-				<mesh filename="./resources/model/test_objects/meshes/collision/collision_box_left_edge_only.obj" scale="1.0 1.0 1.0" />
+				<mesh filename="./resources/model/test_objects/meshes/collision/collision_box_edge_top.obj" scale="1.0 1.0 1.0" />
 	        </geometry>
-	    </visual> -->
+	    </visual>
 
 		<!-- Newly added collision box -->
 
 		<collision>
 	        <origin xyz="0 0 0" rpy="0 0 0" />
 			<geometry>
-				<mesh filename="./resources/model/test_objects/meshes/collision/collision_box_left_edge_only.obj" scale="1.0 1.0 1.0" />
+				<mesh filename="./resources/model/test_objects/meshes/collision/collision_box_edge_top.obj" scale="1.0 1.0 1.0" />
 	        </geometry>
 		</collision>
 	</static_object>
 
-	<static_object name="TableRightEdge">
+	<static_object name="TableEdgeBottom">
 		<origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
 
 		<!-- Below is the visualization for the collision box -->
 
-		<!-- <visual>
+		<visual>
 	        <origin xyz="0 0 0" rpy="0 0 0" />
 			<geometry>
-				<mesh filename="./resources/model/test_objects/meshes/collision/collision_box_right_edge_only.obj" scale="1.0 1.0 1.0" />
+				<mesh filename="./resources/model/test_objects/meshes/collision/collision_box_edge_bottom.obj" scale="1.0 1.0 1.0" />
 	        </geometry>
-	    </visual> -->
+	    </visual>
 
 		<!-- Newly added collision box -->
 
 		<collision>
 	        <origin xyz="0 0 0" rpy="0 0 0" />
 			<geometry>
-				<mesh filename="./resources/model/test_objects/meshes/collision/collision_box_right_edge_only.obj" scale="1.0 1.0 1.0" />
+				<mesh filename="./resources/model/test_objects/meshes/collision/collision_box_edge_bottom.obj" scale="1.0 1.0 1.0" />
 	        </geometry>
 		</collision>
 	</static_object>
+
+	<static_object name="TableEdgeLeftTop">
+		<origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+
+		<!-- Below is the visualization for the collision box -->
+
+		<visual>
+	        <origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="./resources/model/test_objects/meshes/collision/collision_box_edge_left_top.obj" scale="1.0 1.0 1.0" />
+	        </geometry>
+	    </visual>
+
+		<!-- Newly added collision box -->
+
+		<collision>
+	        <origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="./resources/model/test_objects/meshes/collision/collision_box_edge_left_top.obj" scale="1.0 1.0 1.0" />
+	        </geometry>
+		</collision>
+	</static_object>
+
+	<static_object name="TableEdgeRightTop">
+		<origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+
+		<!-- Below is the visualization for the collision box -->
+
+		<visual>
+	        <origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="./resources/model/test_objects/meshes/collision/collision_box_edge_right_top.obj" scale="1.0 1.0 1.0" />
+	        </geometry>
+	    </visual>
+
+		<!-- Newly added collision box -->
+
+		<collision>
+	        <origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="./resources/model/test_objects/meshes/collision/collision_box_edge_right_top.obj" scale="1.0 1.0 1.0" />
+	        </geometry>
+		</collision>
+	</static_object>
+
+	<static_object name="TableEdgeLeftBottom">
+		<origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+
+		<!-- Below is the visualization for the collision box -->
+
+		<visual>
+	        <origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="./resources/model/test_objects/meshes/collision/collision_box_edge_left_bottom.obj" scale="1.0 1.0 1.0" />
+	        </geometry>
+	    </visual>
+
+		<!-- Newly added collision box -->
+
+		<collision>
+	        <origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="./resources/model/test_objects/meshes/collision/collision_box_edge_left_bottom.obj" scale="1.0 1.0 1.0" />
+	        </geometry>
+		</collision>
+	</static_object>
+
+	<static_object name="TableEdgeRightBottom">
+		<origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+
+		<!-- Below is the visualization for the collision box -->
+
+		<visual>
+	        <origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="./resources/model/test_objects/meshes/collision/collision_box_edge_right_bottom.obj" scale="1.0 1.0 1.0" />
+	        </geometry>
+	    </visual>
+
+		<!-- Newly added collision box -->
+
+		<collision>
+	        <origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="./resources/model/test_objects/meshes/collision/collision_box_edge_right_bottom.obj" scale="1.0 1.0 1.0" />
+	        </geometry>
+		</collision>
+	</static_object>
+
+	
 
 	<dynamic_object name="puck">
-		<origin xyz="-0.30 0.0 5" rpy="0 0 0" />
+		<origin xyz="0.30 0.1 0.565" rpy="0 0 0" />
 		<inertial>
         	<origin xyz="0 0 0" rpy="0 0 0" />
         	<mass value="0.1" />
