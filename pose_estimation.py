@@ -7,6 +7,7 @@ Change your marker size in the cv2.aruco.estimatePoseSingleMarkers() function
 
 import numpy as np
 import cv2
+import time
 import sys
 from utils import ARUCO_DICT
 import argparse
@@ -32,8 +33,9 @@ def pose_estimation(frame, aruco_dict_type, matrix_coefficients, distortion_coef
     return:-
     frame - The frame with the axis drawn on it
     '''
-
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    ret, gray = cv2.threshold(gray, 0, 255, cv2.THRESH_OTSU)
+
     aruco_dict = cv2.aruco.getPredefinedDictionary(aruco_dict_type)
     aruco_parameters = cv2.aruco.DetectorParameters()
     aruco_detector = cv2.aruco.ArucoDetector(aruco_dict, aruco_parameters)
@@ -114,13 +116,15 @@ if __name__ == '__main__':
     d = np.load(distortion_coefficients_path)
 
     video = cv2.VideoCapture(0)
-    time.sleep(0.1)
+    time.sleep(0.04)
 
     while True:
-        ret, frame = video.read()
+        start_time = time.time()
 
+        ret, frame = video.read()
         if not ret:
             break
+        
         
         h, w = frame.shape[:2]
         newcameramtx, roi = cv2.getOptimalNewCameraMatrix(k, d, (w,h), 1, (w,h))
@@ -129,6 +133,7 @@ if __name__ == '__main__':
         dst = dst[y:y+h, x:x+w]
         
         output = pose_estimation(dst, aruco_dict_type, k, d)
+        print(time.time() - start_time, " ms")
 
         cv2.imshow('Estimated Pose', output)
 
