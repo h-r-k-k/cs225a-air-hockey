@@ -9,7 +9,7 @@
 #include "Sai2Simulation.h"
 #include "Sai2Primitives.h"
 #include "timer/LoopTimer.h"
-#include <GL/glew.h>
+// #include <GL/glew.h>
 #include <dynamics3d.h>
 #include "redis/RedisClient.h"
 #include <GLFW/glfw3.h>  // must be loaded after loading opengl/glew
@@ -230,7 +230,7 @@ int main() {
 	// create a timer
 	LoopTimer timer;
 	timer.initializeTimer();
-	timer.setLoopFrequency(1000); 
+	timer.setLoopFrequency(600); 
 	double start_time = timer.elapsedTime(); //secs
 	bool fTimerDidSleep = true;
 
@@ -251,7 +251,7 @@ int main() {
 	Vector3d Pos;
 	Vector3d Vel;
 	// Marker : Mapping 
-	double MappingFactor = 1.5;
+	double MappingFactor = 3.5;
 	VectorXd mallet_q_desired(mallet_dof);
 	// strategy : default values for attack and defend mode
 	double v_thres = 1.0;		// 0.5
@@ -291,8 +291,8 @@ int main() {
 		// read the tracking position of marker
 		Mallet_Y_Pos = -1.0 * stod(redis_client.get(MALLET_X_POS_KEY));
 		Mallet_X_Pos = stod(redis_client.get(MALLET_Y_POS_KEY));
-		double  mallet_Y_scaled = 0.0 + MappingFactor * 2.0 * (Mallet_Y_Pos - mallet_Y_offset - 0.0);
-		double  mallet_X_scaled = 0.55 + MappingFactor * (Mallet_X_Pos - mallet_X_offset - 0.55);
+		double  mallet_Y_scaled = 0.0 + MappingFactor * 1.0 * (Mallet_Y_Pos - mallet_Y_offset - 0.0);
+		double  mallet_X_scaled = 0.55 + MappingFactor * 1.5 *(Mallet_X_Pos - mallet_X_offset - 0.55);
 		if (mallet_X_scaled >= 0.618) {
 			mallet_X_scaled = 0.615;
 		}
