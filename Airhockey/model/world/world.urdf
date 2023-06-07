@@ -58,7 +58,7 @@
 
 	</static_object> -->
 	
-	<static_object name="Arcade Room">
+	<static_object name="ArcadeRoom">
 		<origin xyz="-0.75 0.0 0" rpy="0 0 0" />
 		<inertial>
         	<origin xyz="0 0 0" rpy="0 0 0" />
