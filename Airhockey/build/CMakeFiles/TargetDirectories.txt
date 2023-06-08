@@ -1,4 +1,0 @@
-/home/hrk1020/sai2/apps/cs225a/FinalProject/cs225a-air-hockey/Airhockey/build/CMakeFiles/controller.dir
-/home/hrk1020/sai2/apps/cs225a/FinalProject/cs225a-air-hockey/Airhockey/build/CMakeFiles/simviz.dir
-/home/hrk1020/sai2/apps/cs225a/FinalProject/cs225a-air-hockey/Airhockey/build/CMakeFiles/edit_cache.dir
-/home/hrk1020/sai2/apps/cs225a/FinalProject/cs225a-air-hockey/Airhockey/build/CMakeFiles/rebuild_cache.dir
